@@ -7,7 +7,6 @@
     'ga_urlutils_service',
     'pascalprecht.translate'
   ]);
-
   module.controller('GaMeasureController',
       function($scope, $translate, $http, $rootScope, gaGlobalOptions,
           gaUrlUtils) {
@@ -23,8 +22,8 @@
                 bottom: 40,
                 left: 60
               },
-              width: 600,
-              height: 350,
+              width: $(window).width()-314,
+              height: 250,
               elevationModel: 'COMB'
           },
           styleFunction: (function() {

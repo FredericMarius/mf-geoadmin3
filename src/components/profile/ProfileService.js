@@ -120,7 +120,7 @@
           element.className = 'ga-profile-inner';
 
           var svg = d3.select(element).append('svg')
-              .attr('width', width + marginHoriz)
+              .attr('width', width + marginHoriz + 0)
               .attr('height', height + marginVert)
               .attr('class', 'ga-profile-svg');
 
