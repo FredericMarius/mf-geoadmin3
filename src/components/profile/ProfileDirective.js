@@ -53,6 +53,13 @@
                 profile.updateLabels();
               }
             });
+            
+            $($window).on('resize', function() {
+              if (profile && profile.data) {              
+                profile.update(profile.data, [$($window).width() - 314, 250]);
+                profile.updateLabels();
+              }
+            });
 
             $rootScope.$on('gaProfileDataUpdated', function(ev, data) {
               profile.update(data);

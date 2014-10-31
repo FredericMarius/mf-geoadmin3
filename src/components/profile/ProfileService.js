@@ -19,8 +19,6 @@
 
         var onD3Loaded = function() {
           d3 = $window.d3;
-          x = d3.scale.linear().range([0, width]);
-          y = d3.scale.linear().range([height, 0]);
           lazyLoadCB();
         };
 
@@ -112,19 +110,21 @@
 
         this.create = function(data) {
           var that = this;
+          x = d3.scale.linear().range([0, width]);
+          y = d3.scale.linear().range([height, 0]);
+         
           this.data = this.formatData(data);
-
           this.domain = getXYDomains(that.data);
           var axis = createAxis(this.domain);
           var element = document.createElement('DIV');
           element.className = 'ga-profile-inner';
 
-          var svg = d3.select(element).append('svg')
+          this.svg = d3.select(element).append('svg')
               .attr('width', width + marginHoriz + 0)
               .attr('height', height + marginVert)
               .attr('class', 'ga-profile-svg');
-
-          var group = svg
+  
+          var group = this.svg
             .append('g')
               .attr('class', 'ga-profile-group')
               .attr('transform', 'translate(' + options.margin.left +
@@ -210,8 +210,18 @@
               .text($translate(options.yLabel) + ' [m]');
         };
 
-        this.update = function(data) {
+        this.update = function(data, size) {
           var that = this;
+          if (size) {;
+            width = size[0] - marginHoriz;
+            height = size[1] - marginVert;
+            x = d3.scale.linear().range([0, width]);
+            y = d3.scale.linear().range([height, 0])
+            this.svg.transition().duration(1500)
+              .attr('width', width + marginHoriz + 0)
+              .attr('height', height + marginVert)
+              .attr('class', 'ga-profile-svg');
+          }
           this.data = this.formatData(data);
 
           this.domain = getXYDomains(that.data);
