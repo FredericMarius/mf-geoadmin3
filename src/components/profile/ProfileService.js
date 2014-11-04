@@ -168,7 +168,7 @@
 
           this.group = group;
 
-          var legend = group.append('g')
+          /*var legend = group.append('g')
               .attr('class', 'ga-profile-legend')
               .attr('x', width - 65)
               .attr('y', 10)
@@ -176,6 +176,14 @@
               .attr('height', 100);
 
           legend.append('text')
+              .attr('x', width - 113)
+              .attr('y', 11)
+              .attr('width', 100)
+              .attr('height', 30)
+              .text('swissALTI3D/DHM25');*/
+
+          group.append('text')
+              .attr('class', 'ga-profile-legend')
               .attr('x', width - 113)
               .attr('y', 11)
               .attr('width', 100)
@@ -212,16 +220,6 @@
 
         this.update = function(data, size) {
           var that = this;
-          if (size) {;
-            width = size[0] - marginHoriz;
-            height = size[1] - marginVert;
-            x = d3.scale.linear().range([0, width]);
-            y = d3.scale.linear().range([height, 0])
-            this.svg.transition().duration(1500)
-              .attr('width', width + marginHoriz + 0)
-              .attr('height', height + marginVert)
-              .attr('class', 'ga-profile-svg');
-          }
           this.data = this.formatData(data);
 
           this.domain = getXYDomains(that.data);
@@ -252,6 +250,66 @@
                   .tickFormat('')
               );
         };
+  
+        //New function for responsive svg
+        this.updateSvgSize = function(data, size) {
+          var that = this;
+          if (size) {;
+            width = size[0] - marginHoriz;
+            height = size[1] - marginVert;
+            x = d3.scale.linear().range([0, width]);
+            y = d3.scale.linear().range([height, 0])
+            this.svg.transition().duration(1500)
+              .attr('width', width + marginHoriz + 0)
+              .attr('height', height + marginVert)
+              .attr('class', 'ga-profile-svg');
+          } else {
+            this.data = this.formatData(data);
+          }
+          this.domain = getXYDomains(that.data);
+          var axis = createAxis(this.domain);
+          var area = createArea(this.domain, 'cardinal');
+          var path = this.group.select('.ga-profile-area');
+          path.datum(that.data)
+            .transition().duration(1500)
+              .attr('class', 'ga-profile-area')
+              .attr('d', area);
+
+          this.group.select('g.x')
+            .transition().duration(1500)
+              .call(axis.X);
+          this.group.select('g.y')
+            .transition().duration(1500)
+              .call(axis.Y);
+          this.group.select('g.ga-profile-grid-x')
+            .transition().duration(1500)
+              .call(axis.X
+                  .tickSize(-height, 0, 0)
+                  .tickFormat('')
+              );
+          this.group.select('g.ga-profile-grid-y')
+            .transition().duration(1500)
+              .call(axis.Y
+                  .tickSize(-width, 0, 0)
+                  .tickFormat('')
+              );
+           
+          this.group.select('text.ga-profile-label-x')
+              .text($translate(options.xLabel) + ' [' +
+                  $translate(that.unitX) + ']');
+          this.group.select('text.ga-profile-label-x')
+              .transition().duration(1500)
+                .attr('x', width / 2)
+                .attr('y', height + options.margin.bottom - 2)
+                .style('text-anchor', 'middle');
+          this.group.select('text.ga-profile-label-y')
+              .text($translate(options.yLabel) + ' [m]');
+          this.group.select('text.ga-profile-legend')
+            .transition().duration(1500)
+              .attr('x', width - 113)
+              .attr('y', 11)
+              .text('swissALTI3D/DHM25');
+        }; 
       }
 
       var d3LibUrl = this.d3libUrl;

@@ -55,9 +55,8 @@
             });
             
             $($window).on('resize', function() {
-              if (profile && profile.data) {              
-                profile.update(profile.data, [$($window).width() - 314, 250]);
-                profile.updateLabels();
+              if (profile && profile.data) {
+                profile.updateSvgSize(profile.data, [$($window).width() - 314, 250]);
               }
             });
 
