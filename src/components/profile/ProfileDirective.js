@@ -53,10 +53,11 @@
                 profile.updateLabels();
               }
             });
-            
+
             $($window).on('resize', function() {
               if (profile && profile.data) {
-                profile.updateSvgSize(profile.data, [$($window).width() - 314, 250]);
+                profile.updateSvgSize(profile.data,
+                    [$($window).width() - 314, 250]);
               }
             });
 

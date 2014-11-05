@@ -112,7 +112,7 @@
           var that = this;
           x = d3.scale.linear().range([0, width]);
           y = d3.scale.linear().range([height, 0]);
-         
+
           this.data = this.formatData(data);
           this.domain = getXYDomains(that.data);
           var axis = createAxis(this.domain);
@@ -123,7 +123,7 @@
               .attr('width', width + marginHoriz + 0)
               .attr('height', height + marginVert)
               .attr('class', 'ga-profile-svg');
-  
+
           var group = this.svg
             .append('g')
               .attr('class', 'ga-profile-group')
@@ -250,7 +250,7 @@
                   .tickFormat('')
               );
         };
-  
+
         //New function for responsive svg
         this.updateSvgSize = function(data, size) {
           var that = this;
@@ -258,7 +258,7 @@
             width = size[0] - marginHoriz;
             height = size[1] - marginVert;
             x = d3.scale.linear().range([0, width]);
-            y = d3.scale.linear().range([height, 0])
+            y = d3.scale.linear().range([height, 0]);
             this.svg.transition().duration(1500)
               .attr('width', width + marginHoriz + 0)
               .attr('height', height + marginVert)
@@ -293,7 +293,7 @@
                   .tickSize(-width, 0, 0)
                   .tickFormat('')
               );
-           
+
           this.group.select('text.ga-profile-label-x')
               .text($translate(options.xLabel) + ' [' +
                   $translate(that.unitX) + ']');
@@ -309,7 +309,7 @@
               .attr('x', width - 113)
               .attr('y', 11)
               .text('swissALTI3D/DHM25');
-        }; 
+        };
       }
 
       var d3LibUrl = this.d3libUrl;
