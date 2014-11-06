@@ -22,7 +22,8 @@
                 bottom: 40,
                 left: 60
               },
-              width: $(window).width()-364,
+              //width: $(window).width() - 364,
+              width: $(window).width(),
               height: 250,
               elevationModel: 'COMB'
           },

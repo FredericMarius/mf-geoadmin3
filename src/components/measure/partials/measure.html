@@ -1,5 +1,5 @@
 <div class="ga-measure">
-  <div class="measure-panel"> 
+  <div id="measure-panel"> 
     <div class="ga-measure-text">
       <div class="hidden-print measure-info" translate>measure_instruction</div>
       <div class="measure-info">
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div ng-show="options.isProfileActive" ga-profile ga-profile-options="options.profileOptions"></div>
-  <div class="ga-measure-buttons-panel hidden-print">
+  <div id="ga-measure-buttons-panel" class="hidden-print">
     <div>
       <button ng-click="options.isProfileActive = !options.isProfileActive"
       class="btn btn-default ga-measure-profile-bt ga-measure-button" data-loading-text="{{'wait_data_loading' |translate}}">{{(options.isProfileActive ? 'hide_profile' : 'display_profile') | translate}}</button></div>
@@ -28,8 +28,5 @@
               ng-click="exportKml()"
               translate>export_kml
       </button></div>
-    <div ng-if="!supportKmlExport" translate>
-      export_kml_notsupported
-    </div>
   </div>
 </div>

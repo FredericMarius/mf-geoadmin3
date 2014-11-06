@@ -13,7 +13,11 @@
         var marginHoriz = options.margin.left + options.margin.right;
         var marginVert = options.margin.top + options.margin.bottom;
         var elevationModel = options.elevationModel || 'DTM25';
-        var width = options.width - marginHoriz;
+        //var width = options.width - marginHoriz;
+        var width = options.width -
+            document.getElementById('measure-panel').offsetWidth -
+            document.getElementById('ga-measure-buttons-panel').offsetWidth -
+            marginHoriz - 39;
         var height = options.height - marginVert;
         var d3, x, y;
 
@@ -120,7 +124,7 @@
           element.className = 'ga-profile-inner';
 
           this.svg = d3.select(element).append('svg')
-              .attr('width', width + marginHoriz + 0)
+              .attr('width', width + marginHoriz)
               .attr('height', height + marginVert)
               .attr('class', 'ga-profile-svg');
 

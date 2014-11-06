@@ -56,8 +56,10 @@
 
             $($window).on('resize', function() {
               if (profile && profile.data) {
-                profile.updateSvgSize(profile.data,
-                    [$($window).width() - 364, 250]);
+                profile.updateSvgSize(profile.data, [$($window).width() -
+                    document.getElementById('measure-panel').offsetWidth -
+                    document.getElementById('ga-measure-buttons-panel' +
+                    '').offsetWidth - 39, 250]);
               }
             });
 
