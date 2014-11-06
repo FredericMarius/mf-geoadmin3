@@ -15,19 +15,21 @@
         <p class="alignright">{{azimuth | number:2}} &deg</p>
       </div>
     </div>
-    <div class="ga-measure-buttons hidden-print">
+  </div>
+  <div ng-show="options.isProfileActive" ga-profile ga-profile-options="options.profileOptions"></div>
+  <div class="ga-measure-buttons-panel hidden-print">
+    <div>
       <button ng-click="options.isProfileActive = !options.isProfileActive"
-      class="btn btn-default ga-measure-profile-bt" data-loading-text="{{'wait_data_loading' |translate}}">{{(options.isProfileActive ? 'hide_profile' : 'display_profile') | translate}}</button>
-      <button class="btn btn-default pull-right"
+      class="btn btn-default ga-measure-profile-bt ga-measure-button" data-loading-text="{{'wait_data_loading' |translate}}">{{(options.isProfileActive ? 'hide_profile' : 'display_profile') | translate}}</button></div>
+    <div>
+      <button class="btn btn-default ga-measure-button"
               ng-disabled="!canExport()"
               ng-if="supportKmlExport"
               ng-click="exportKml()"
               translate>export_kml
-      </button>
-      <div ng-if="!supportKmlExport" translate>
-        export_kml_notsupported
-      </div>
+      </button></div>
+    <div ng-if="!supportKmlExport" translate>
+      export_kml_notsupported
     </div>
   </div>
-  <div ng-show="options.isProfileActive" ga-profile ga-profile-options="options.profileOptions"></div>
 </div>

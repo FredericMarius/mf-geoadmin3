@@ -254,12 +254,13 @@
         //New function for responsive svg
         this.updateSvgSize = function(data, size) {
           var that = this;
+          var profileResponsiveTime = 250;
           if (size) {;
             width = size[0] - marginHoriz;
             height = size[1] - marginVert;
             x = d3.scale.linear().range([0, width]);
             y = d3.scale.linear().range([height, 0]);
-            this.svg.transition().duration(1500)
+            this.svg.transition().duration(profileResponsiveTime)
               .attr('width', width + marginHoriz + 0)
               .attr('height', height + marginVert)
               .attr('class', 'ga-profile-svg');
@@ -271,24 +272,24 @@
           var area = createArea(this.domain, 'cardinal');
           var path = this.group.select('.ga-profile-area');
           path.datum(that.data)
-            .transition().duration(1500)
+            .transition().duration(profileResponsiveTime)
               .attr('class', 'ga-profile-area')
               .attr('d', area);
 
           this.group.select('g.x')
-            .transition().duration(1500)
+            .transition().duration(profileResponsiveTime)
               .call(axis.X);
           this.group.select('g.y')
-            .transition().duration(1500)
+            .transition().duration(profileResponsiveTime)
               .call(axis.Y);
           this.group.select('g.ga-profile-grid-x')
-            .transition().duration(1500)
+            .transition().duration(profileResponsiveTime)
               .call(axis.X
                   .tickSize(-height, 0, 0)
                   .tickFormat('')
               );
           this.group.select('g.ga-profile-grid-y')
-            .transition().duration(1500)
+            .transition().duration(profileResponsiveTime)
               .call(axis.Y
                   .tickSize(-width, 0, 0)
                   .tickFormat('')
@@ -298,14 +299,14 @@
               .text($translate(options.xLabel) + ' [' +
                   $translate(that.unitX) + ']');
           this.group.select('text.ga-profile-label-x')
-              .transition().duration(1500)
+              .transition().duration(profileResponsiveTime)
                 .attr('x', width / 2)
                 .attr('y', height + options.margin.bottom - 2)
                 .style('text-anchor', 'middle');
           this.group.select('text.ga-profile-label-y')
               .text($translate(options.yLabel) + ' [m]');
           this.group.select('text.ga-profile-legend')
-            .transition().duration(1500)
+            .transition().duration(profileResponsiveTime)
               .attr('x', width - 113)
               .attr('y', 11)
               .text('swissALTI3D/DHM25');
