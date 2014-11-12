@@ -8,16 +8,12 @@
   module.provider('gaProfileService', function() {
 
     this.$get = function($timeout, $translate, $window) {
-
+      
       function ProfileChart(options, lazyLoadCB, d3LibUrl) {
         var marginHoriz = options.margin.left + options.margin.right;
         var marginVert = options.margin.top + options.margin.bottom;
         var elevationModel = options.elevationModel || 'DTM25';
-        //var width = options.width - marginHoriz;
-        var width = options.width -
-            document.getElementById('measure-panel').offsetWidth -
-            document.getElementById('ga-measure-buttons-panel').offsetWidth -
-            marginHoriz - 39;
+        var width = options.width - marginHoriz;
         var height = options.height - marginVert;
         var d3, x, y;
 
@@ -114,6 +110,7 @@
 
         this.create = function(data) {
           var that = this;
+
           x = d3.scale.linear().range([0, width]);
           y = d3.scale.linear().range([height, 0]);
 
@@ -259,7 +256,7 @@
         this.updateSvgSize = function(data, size) {
           var that = this;
           var profileResponsiveTime = 250;
-          if (size) {;
+          if (size) {
             width = size[0] - marginHoriz;
             height = size[1] - marginVert;
             x = d3.scale.linear().range([0, width]);

@@ -48,24 +48,20 @@
               }
             });
 
+            $rootScope.$on('gaProfileDataUpdated', function(ev, data, size) {
+              if (size) {
+                profile.updateSvgSize(data, size);
+              } else {
+                profile.update(data);
+                profileeupdateLabels();
+              }
+            });
+
+
             scope.$on('$translateChangeEnd', function() {
               if (angular.isDefined(profile)) {
                 profile.updateLabels();
               }
-            });
-
-            $($window).on('resize', function() {
-              if (profile && profile.data) {
-                profile.updateSvgSize(profile.data, [$($window).width() -
-                    document.getElementById('measure-panel').offsetWidth -
-                    document.getElementById('ga-measure-buttons-panel' +
-                    '').offsetWidth - 39, 250]);
-              }
-            });
-
-            $rootScope.$on('gaProfileDataUpdated', function(ev, data) {
-              profile.update(data);
-              profile.updateLabels();
             });
 
             function attachPathListeners(areaChartPath) {

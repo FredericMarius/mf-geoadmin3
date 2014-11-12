@@ -8,7 +8,7 @@
     'pascalprecht.translate'
   ]);
   module.controller('GaMeasureController',
-      function($scope, $translate, $http, $rootScope, gaGlobalOptions,
+      function($scope, $translate, $http, $rootScope, $window, gaGlobalOptions,
           gaUrlUtils) {
         $scope.options = {
           isProfileActive: false,
@@ -22,8 +22,6 @@
                 bottom: 40,
                 left: 60
               },
-              //width: $(window).width() - 364,
-              width: $(window).width(),
               height: 250,
               elevationModel: 'COMB'
           },
@@ -99,6 +97,7 @@
           }
         })();
         
+        var win = $($window);
         var isProfileCreated = false;
         var createProfile = function(feature, callback) {
           var coordinates = feature.getGeometry().getCoordinates();
@@ -111,6 +110,10 @@
           if (!callback) {
             callback = function(data, status) {
               isProfileCreated = true;
+              // Profile width is dynamic, so before the first loading we must 
+              // set the good value.
+              // 32 is the padding and margin of the popup.
+              $scope.options.profileOptions.width = win.width() - $('[ga-measure]').width() - 32;
               $rootScope.$broadcast('gaProfileDataLoaded', data);
             };
           }
@@ -135,5 +138,22 @@
          }
        }
 
+       var panel;
+       var panelBt;
+       win.on('resize', function() {
+         if (isProfileCreated) {
+           if (!panel) {
+             panel = $('.ga-measure-panel');
+             panelBt =  $('.ga-measure-buttons-panel');
+           }
+           // 39 padding and margins 
+           $scope.options.profileOptions.width = win.width() - panel.width() -
+               panelBt.width() - 39;
+           $rootScope.$broadcast('gaProfileDataUpdated', null, [
+             $scope.options.profileOptions.width,
+             $scope.options.profileOptions.height
+           ]);
+         }
+       });
       });
 })();
