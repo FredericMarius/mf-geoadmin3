@@ -66,7 +66,7 @@
               placement: 'left',
               container: 'body',
               title: function() {
-                return $translate('time_bt_enabled_tooltip');
+                return $translate.instant('time_bt_enabled_tooltip');
               }
             });
           }
