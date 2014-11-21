@@ -513,8 +513,7 @@
 
           }
           // printing time series
-          if (config.timeEnabled && timeSelectorEnabled == undefined &&
-              currentTime == undefined && multiPagesPrint) {
+          if (config.timeEnabled && $scope.options.movie) {
               enc['timestamps'] = config.timestamps;
           }
 
@@ -605,7 +604,7 @@
           }
         }
       });
-      if (layersYears) {
+      if (layersYears && !$scope.options.movie) {
         var years = layersYears.reduce(function(a, b) {
           if (a.indexOf(b) < 0) a.push(b);
             return a;
