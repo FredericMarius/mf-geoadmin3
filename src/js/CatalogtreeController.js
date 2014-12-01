@@ -8,7 +8,7 @@
         
         $scope.options = {
           catalogUrlTemplate: gaGlobalOptions.cachedApiUrl +
-            '/rest/services/{Topic}/CatalogServer'
+            '/rest/services/{Topic}/CatalogServer.json'   // PATCH FREDERIC
         };
 
       });
