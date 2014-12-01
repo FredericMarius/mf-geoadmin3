@@ -11,7 +11,7 @@ itemscope itemtype="http://schema.org/WebApplication"
     <meta http-equiv="X-UA-Compatible" content="IE=9,IE=10,IE=edge,chrome=1"/>
     <![endif]-->
 % if device == 'desktop':
-    <title translate="page_title">map.geo.admin.ch</title>
+    <title translate="page_title">Ajilon CodeJam: Mapping Solutions</title>
 % else:
     <title>geo.admin.ch</title>
 % endif
@@ -140,8 +140,8 @@ itemscope itemtype="http://schema.org/WebApplication"
     <div id="header" class="navbar navbar-fixed-top">
       <div id="logo" class="pull-left">
         <a ng-href="?topic={{topicId}}&lang={{langId}}">
-          <img ng-if="langId" ng-src="${versionslashed}img/logo.ch.{{langId}}.png" alt="big_logo" draggable="false"/>
-          <img src="${versionslashed}img/logo.ch.small.png" alt="small_logo" draggable="false"/>
+          <img ng-if="langId" ng-src="${versionslashed}img/codejamLogo.jpg" alt="big_logo" draggable="false"/>
+          <img src="${versionslashed}img/codejamLogo.jpg" alt="small_logo" draggable="false"/>
         </a>
       </div>
       <div id="search-container" ng-controller="GaSearchController">
@@ -663,10 +663,11 @@ itemscope itemtype="http://schema.org/WebApplication"
 
         module.config(function(gaLayersProvider, gaGlobalOptions) {
           gaLayersProvider.wmtsGetTileUrlTemplate =
-              '//wmts{5-9}.geo.admin.ch/1.0.0/{Layer}/default/{Time}/21781/{TileMatrix}/{TileRow}/{TileCol}.{Format}';
+              'https://mapsengine.google.com/09372590152434720789-00913315481290556980-4/wmts/?service=WMTS&request=GetTile&version=1.0.0&layer=09372590152434720789-02344374277596842979-4&style=default&format=image/png&TileMatrixSet=EPSG:4326&TileMatrix=EPSG:4326:{TileMatrix}&TileRow={TileRow}&TileCol={TileCol}';
+			  //'//wmts{5-9}.geo.admin.ch/1.0.0/{Layer}/default/{Time}/21781/{TileMatrix}/{TileRow}/{TileCol}.{Format}';
 
           gaLayersProvider.layersConfigUrlTemplate =
-              gaGlobalOptions.cachedApiUrl + '/rest/services/all/MapServer/layersConfig?lang={Lang}';
+              gaGlobalOptions.cachedApiUrl + '/rest/services.all.MapServer.layersConfig.json';			// FREDERIC PATCH '/rest/services/all/MapServer/layersConfig?lang={Lang}';
 
           gaLayersProvider.legendUrlTemplate =
               gaGlobalOptions.cachedApiUrl + '/rest/services/{Topic}/MapServer/{Layer}/legend?lang={Lang}';
